@@ -11,7 +11,10 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'id'=>'0',
+            'name'=>'No Author'
+        ]);
     }
 
 }
