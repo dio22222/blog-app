@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::paginate(10);
+        $posts = Post::query()
+                    ->select(['title', 'body', 'slug'])
+                    ->with('author:id,name')
+                    ->paginate(10);
 
         return view('posts.index',compact('posts'));
     }
